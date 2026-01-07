@@ -1,0 +1,32 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  port: 5432
+  username: trongtk248
+  password: Admin123@
+
+development:
+  <<: *default
+  database: Blog-VT-dev
+test:
+  <<: *default
+  database: Blog-VT-test
+
+production:
+  primary:
+    <<: *default
+    database: Blog-VT-production
+  cache:
+    <<: *default
+    database: Blog-VT-production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: Blog-VT-production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: Blog-VT-production_cable
+    migrations_paths: db/cable_migrate
